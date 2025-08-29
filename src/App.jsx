@@ -10,11 +10,10 @@ function App() {
     return (
         <div className="min-h-screen bg-gray-100">
             <header className="p-4 bg-blue-500 text-white flex gap-4">
-                <Link to="/">메인</Link>
-                <Link to="/search">검색</Link>
-                <Link to="/favorites">찜 목록</Link>
+                <Link to="/" className="hover:underline">메인</Link>
+                <Link to="/search" className="hover:underline">검색</Link>
+                <Link to="/favorites" className="hover:underline">찜 목록</Link>
             </header>
-
             <main className="p-4">
                 <Suspense fallback={<div className="text-center p-6">⏳ 로딩중...</div>}>
                     <Routes>

@@ -5,9 +5,9 @@ const Detail = () => {
     const { id } = useParams();
 
     return (
-        <section className="p-6 text-center">
-            <h1 className="text-2xl font-bold">포켓몬 상세 페이지</h1>
-            <p>선택된 포켓몬 ID: {id}</p>
+        <section className="section-wrapper text-center">
+            <h1 className="text-2xl font-bold mb-4">포켓몬 상세 페이지</h1>
+            <p className="text-gray-700">선택된 포켓몬 ID: {id}</p>
         </section>
     );
 };
