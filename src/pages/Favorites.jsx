@@ -1,7 +1,9 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleFavorite } from "../RTK/pokemonSlice";
 
 const Favorites = () => {
+    const dispatch = useDispatch();
     const favorites = useSelector((state) => state.pokemon.favorites);
     const allPokemons = useSelector((state) => state.pokemon.list);
 
@@ -15,7 +17,7 @@ const Favorites = () => {
             ) : (
                 <div className="favorites-grid">
                     {favoriteList.map((p) => (
-                        <div key={p.id} className="pokemon-card">
+                        <div key={p.id} className="pokemon-card cursor-pointer" onClick={() => dispatch(toggleFavorite(p.id))}>
                             <img src={p.image} alt={p.name} />
                             <h2>{p.name}</h2>
                         </div>

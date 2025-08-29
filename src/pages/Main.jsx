@@ -19,8 +19,8 @@ const Main = () => {
             {list.map((p) => (
                 <Link key={p.id} to={`/detail/${p.id}`} className="block">
                     <div className="pokemon-card">
-                        <img src={p.image} alt={p.name} />
-                        <h2>{p.name}</h2>
+                        <img src={p.image} alt={p.name} className="w-24 h-24 mx-auto" />
+                        <h2 className="text-center mt-2 font-bold text-gray-800 capitalize">{p.name}</h2>
                     </div>
                 </Link>
             ))}

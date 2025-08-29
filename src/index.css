@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 카드 공통 스타일 */
+/* 카드 스타일 */
 .pokemon-card {
     @apply bg-white shadow-md p-4 rounded-xl transition-transform transform hover:scale-105;
 }
@@ -12,7 +12,7 @@
 }
 
 .pokemon-card h2 {
-    @apply text-center mt-2 font-bold text-gray-800;
+    @apply text-center mt-2 font-bold text-gray-800 capitalize;
 }
 
 /* 섹션 공통 패딩 */
@@ -20,7 +20,7 @@
     @apply p-6;
 }
 
-/* 찜 목록 및 검색 결과 그리드 */
+/* 그리드 레이아웃 */
 .favorites-grid {
     @apply grid grid-cols-2 md:grid-cols-4 gap-4;
 }
