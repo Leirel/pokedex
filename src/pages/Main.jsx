@@ -8,16 +8,15 @@ const Main = () => {
     ];
 
     return (
-        <section className="p-6 grid grid-cols-2 md:grid-cols-4 gap-4">
+        <section className="section-wrapper grid grid-cols-2 md:grid-cols-4 gap-4">
             {pokemons.map((p) => (
-                <Link key={p.id} to={`/detail/${p.id}`}>
-                    <div className="bg-white shadow-md p-4 rounded-xl hover:scale-105 transition">
-                        <img src={p.image} alt={p.name} className="w-24 h-24 mx-auto" />
-                        <h2 className="text-center mt-2 font-bold">{p.name}</h2>
-                    </div>
+                <Link key={p.id} to={`/detail/${p.id}`} className="pokemon-card">
+                    <img src={p.image} alt={p.name} />
+                    <h2>{p.name}</h2>
                 </Link>
             ))}
         </section>
+
     );
 };
 

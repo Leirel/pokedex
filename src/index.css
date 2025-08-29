@@ -1,3 +1,35 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* 공통 텍스트 스타일 */
+h1,
+h2,
+h3 {
+    @apply font-sans;
+}
+
+/* 카드 호버 애니메이션 */
+.pokemon-card {
+    @apply bg-white shadow-md p-4 rounded-xl transition-transform transform hover:scale-105;
+}
+
+/* 카드 이미지 크기 */
+.pokemon-card img {
+    @apply w-24 h-24 mx-auto;
+}
+
+/* 카드 이름 */
+.pokemon-card h2 {
+    @apply text-center mt-2 font-bold text-gray-800;
+}
+
+/* Section 공통 패딩 */
+.section-wrapper {
+    @apply p-6;
+}
+
+/* 찜 목록 그리드 */
+.favorites-grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-4;
+}
