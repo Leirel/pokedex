@@ -1,13 +1,14 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleFavorite } from "../RTK/pokemonSlice";
+import { Link } from "react-router-dom";
 
 const Favorites = () => {
     const dispatch = useDispatch();
     const favorites = useSelector((state) => state.pokemon.favorites);
-    const allPokemons = useSelector((state) => state.pokemon.list);
+    const pokemons = useSelector((state) => state.pokemon.list);
 
-    const favoriteList = allPokemons.filter((p) => favorites.includes(p.id));
+    const favoriteList = pokemons.filter((p) => favorites.includes(p.id));
 
     return (
         <section className="section-wrapper">
@@ -17,9 +18,20 @@ const Favorites = () => {
             ) : (
                 <div className="favorites-grid">
                     {favoriteList.map((p) => (
-                        <div key={p.id} className="pokemon-card cursor-pointer" onClick={() => dispatch(toggleFavorite(p.id))}>
-                            <img src={p.image} alt={p.name} />
-                            <h2>{p.name}</h2>
+                        <div
+                            key={p.id}
+                            className="pokemon-card cursor-pointer relative"
+                        >
+                            <Link to={`/detail/${p.id}`} className="block">
+                                <img src={p.image} alt={p.name} />
+                                <h2>{p.name}</h2>
+                            </Link>
+                            <button
+                                onClick={() => dispatch(toggleFavorite(p.id))}
+                                className="absolute top-2 right-2 px-2 py-1 rounded-full text-white bg-red-500 text-xs"
+                            >
+                                💖
+                            </button>
                         </div>
                     ))}
                 </div>

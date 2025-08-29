@@ -14,7 +14,7 @@ export const fetchPokemonList = createAsyncThunk(
                     image: data.sprites.front_default,
                     backImage: data.sprites.back_default,
                     types: data.types,
-                    stats: data.stats
+                    stats: data.stats,
                 };
             })
         );
