@@ -8,9 +8,15 @@ export const fetchPokemonList = createAsyncThunk(
             ids.map(async (id) => {
                 const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
                 const data = await res.json();
+
+                const speciesRes = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+                const speciesData = await speciesRes.json();
+                const koreanNameObj = speciesData.names.find(n => n.language.name === "ko");
+                const koreanName = koreanNameObj ? koreanNameObj.name : data.name;
+
                 return {
                     id: data.id,
-                    name: data.name,
+                    name: koreanName,
                     image: data.sprites.front_default,
                     backImage: data.sprites.back_default,
                     types: data.types,
