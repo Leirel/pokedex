@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import PokemonCard from "../components/PokemonCard";
 
 const Search = () => {
     const [query, setQuery] = useState("");
-    const pokemons = useSelector((state) => state.pokemon.list);
+    const { list: pokemons, loading } = useSelector((state) => state.pokemon);
 
-    const filtered = pokemons.filter((p) =>
-        p.name.toLowerCase().includes(query.toLowerCase())
-    );
+    const filtered = useMemo(() => {
+        const q = query.trim().toLowerCase();
+        if (!q) return pokemons;
+        return pokemons.filter((p) => p.name.toLowerCase().includes(q));
+    }, [pokemons, query]);
+
+    if (loading) return <p className="text-center p-6">⏳ 로딩 중...</p>;
 
     return (
         <section className="section-wrapper">
@@ -25,12 +29,7 @@ const Search = () => {
             ) : (
                 <div className="favorites-grid">
                     {filtered.map((p) => (
-                        <Link key={p.id} to={`/detail/${p.id}`} className="block">
-                            <div className="pokemon-card">
-                                <img src={p.image} alt={p.name} />
-                                <h2>{p.name}</h2>
-                            </div>
-                        </Link>
+                        <PokemonCard key={p.id} pokemon={p} />
                     ))}
                 </div>
             )}

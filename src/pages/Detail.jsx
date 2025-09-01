@@ -1,34 +1,30 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { toggleFavorite } from "../RTK/pokemonSlice";
+import { useSelector } from "react-redux";
+import FavoriteButton from "../components/FavoriteButton";
+import FlipCard from "../components/FlipCard";
 
 const Detail = () => {
     const { id } = useParams();
-    const dispatch = useDispatch();
-    const pokemons = useSelector((state) => state.pokemon.list);
-    const favorites = useSelector((state) => state.pokemon.favorites);
+    const { list } = useSelector((state) => state.pokemon);
 
-    const pokemon = pokemons.find((p) => p.id === Number(id));
-    const isFavorite = favorites.includes(Number(id));
-
+    const pokemon = list.find((p) => p.id === Number(id));
     if (!pokemon) return <p className="text-center p-6">⏳ 로딩 중...</p>;
 
     return (
         <section className="section-wrapper text-center max-w-md mx-auto bg-white shadow-md rounded-xl p-6">
-            <h1 className="text-3xl font-bold mb-4 capitalize">{pokemon.name}</h1>
-            <img src={pokemon.image} alt={pokemon.name} className="mx-auto w-32 h-32 mb-4" />
-            <button
-                onClick={() => dispatch(toggleFavorite(pokemon.id))}
-                className={`mt-2 px-4 py-2 rounded-full text-white ${isFavorite ? "bg-red-500" : "bg-gray-400"
-                    }`}
-            >
-                {isFavorite ? "💖 찜 해제" : "🤍 찜하기"}
-            </button>
-            <p className="text-gray-700 mb-2">ID: {pokemon.id}</p>
+            <div className="flex items-center justify-between mb-2">
+                <h1 className="text-3xl font-bold capitalize">{pokemon.name}</h1>
+                <FavoriteButton id={pokemon.id} />
+            </div>
 
-            {pokemon.types && (
-                <div className="mb-4">
+            {/* FlipCard: 앞/뒤 이미지 전달 */}
+            <FlipCard front={pokemon.image} back={pokemon.backImage} />
+
+            <p className="text-gray-700 mt-4">ID: {pokemon.id}</p>
+
+            {pokemon.types?.length > 0 && (
+                <div className="mb-4 mt-4">
                     <h2 className="font-bold">타입</h2>
                     <div className="flex justify-center gap-2 mt-1">
                         {pokemon.types.map((t) => (
@@ -43,10 +39,10 @@ const Detail = () => {
                 </div>
             )}
 
-            {pokemon.stats && (
-                <div>
-                    <h2 className="font-bold mb-2">능력치</h2>
-                    <ul className="text-left">
+            {pokemon.stats?.length > 0 && (
+                <div className="text-left mt-4">
+                    <h2 className="font-bold mb-2 text-center">능력치</h2>
+                    <ul>
                         {pokemon.stats.map((s) => (
                             <li key={s.stat.name} className="mb-1">
                                 <span className="capitalize font-medium">{s.stat.name}:</span>{" "}
